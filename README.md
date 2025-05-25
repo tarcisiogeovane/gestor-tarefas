@@ -45,3 +45,67 @@ Sistema web para cadastro, listagem e gerenciamento de tarefas desenvolvido em J
 <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/gestortarefas"/>
 <property name="jakarta.persistence.jdbc.user" value="seu_usuario"/>
 <property name="jakarta.persistence.jdbc.password" value="sua_senha"/>
+```
+
+## Como rodar o projeto
+
+### Build do projeto
+
+No terminal, na raiz do projeto, rode:
+
+```
+mvn clean package
+```
+
+Isso vai gerar o arquivo `gestor-tarefas.war` na pasta `target`.
+
+### Deploy no servidor WildFly
+
+1. Copie o arquivo WAR gerado (`gestor-tarefas.war`) para a pasta `standalone/deployments` do WildFly.
+2. Inicie o servidor WildFly:
+
+- No Windows:
+
+```
+standalone.bat
+```
+
+- No Linux/Mac:
+
+```
+./standalone.sh
+```
+
+
+3. O WildFly vai detectar o WAR automaticamente e realizar o deploy.
+
+---
+
+## Acessando a aplicação
+
+Abra o navegador e acesse:
+
+```
+http://localhost:8080/gestor-tarefas/
+```
+
+
+Você verá a página inicial com opções para cadastrar novas tarefas e listar as existentes.
+
+---
+
+## Como usar
+
+- **Cadastrar tarefa:** Vá para a página de cadastro, preencha a descrição e a data, e clique em salvar.
+- **Listar tarefas:** Acesse a página de lista para ver todas as tarefas cadastradas.
+- **Editar tarefa:** Na lista, clique em editar para modificar os dados da tarefa.
+- **Excluir tarefa:** Na lista, clique em excluir para remover a tarefa.
+
+---
+
+## Estrutura do projeto
+
+- `src/main/java`: código fonte Java (beans, DAO, entidades, conversores).
+- `src/main/resources`: configurações e arquivos de recursos.
+- `src/main/webapp`: arquivos web (XHTML, WEB-INF).
+- `pom.xml`: configuração do Maven.
