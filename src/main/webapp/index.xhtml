@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Gestor de Tarefas</title>
+</h:head>
+
+<h:body style="text-align:center; padding: 40px; background-color: #f4f4f4; font-family: Arial, sans-serif;">
+
+    <h1 style="color:#333;">Bem-vindo ao Gestor de Tarefas</h1>
+
+    <p:panel header="Ações disponíveis"
+             style="margin: 30px auto;
+             width: 300px;
+             text-align: center;">
+        <h:form>
+            <p:commandButton value="Cadastrar Nova Tarefa"
+                             action="cadastro?faces-redirect=true"
+                             icon="pi pi-plus"
+                             styleClass="p-button-rounded p-button-success"
+                             style="margin-bottom: 10px; width: 100%;" />
+        </h:form>
+
+        <h:form>
+            <p:commandButton value="Listar Tarefas"
+                             action="lista?faces-redirect=true"
+                             icon="pi pi-list"
+                             styleClass="p-button-rounded p-button-info"
+                             style="width: 100%;" />
+        </h:form>
+    </p:panel>
+
+</h:body>
+</html>

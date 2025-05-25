@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Cadastro de Tarefa</title>
+</h:head>
+
+<h:body style="padding: 40px; background-color: #f4f4f4; font-family: Arial, sans-serif;">
+
+    <h1 style="text-align: center; color: #333;">Cadastrar Nova Tarefa</h1>
+
+    <h:form style="max-width: 600px; margin: auto;">
+        <p:panel header="Dados da Tarefa">
+
+            <p:messages id="msgs" />
+
+            <p:panelGrid columns="2" columnClasses="label,value" style="width:100%;" cellpadding="5">
+
+                <h:outputLabel value="Título:" for="titulo" />
+                <p:inputText id="titulo" value="#{tarefaBean.tarefa.titulo}" required="true" />
+
+                <h:outputLabel value="Descrição:" for="descricao" />
+                <p:inputTextarea id="descricao" value="#{tarefaBean.tarefa.descricao}" rows="4" cols="40" />
+
+                <h:outputLabel value="Responsável:" for="responsavel" />
+                <p:inputText id="responsavel" value="#{tarefaBean.tarefa.responsavel}" />
+
+                <h:outputLabel value="Prioridade:" for="prioridade" />
+                <p:selectOneMenu id="prioridade" value="#{tarefaBean.tarefa.prioridade}">
+                    <f:selectItem itemLabel="Selecione" itemValue="" />
+                    <f:selectItem itemLabel="Alta" itemValue="ALTA" />
+                    <f:selectItem itemLabel="Média" itemValue="MEDIA" />
+                    <f:selectItem itemLabel="Baixa" itemValue="BAIXA" />
+                </p:selectOneMenu>
+
+                <h:outputLabel value="Prazo:" for="deadline" />
+                <p:calendar id="deadline" value="#{tarefaBean.tarefa.deadline}" pattern="dd/MM/yyyy" showIcon="true" />
+            </p:panelGrid>
+
+            <br/>
+
+            <div style="text-align: center;">
+                <!-- Botão Salvar ou Atualizar -->
+                <h:panelGroup rendered="#{tarefaBean.tarefa.id == null}">
+                    <p:commandButton value="Salvar" action="#{tarefaBean.salvar}"
+                                     icon="pi pi-save"
+                                     styleClass="p-button-success p-button-rounded"
+                                     update="msgs" />
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tarefaBean.tarefa.id != null}">
+                    <p:commandButton value="Atualizar" action="#{tarefaBean.atualizar}"
+                                     icon="pi pi-refresh"
+                                     styleClass="p-button-warning p-button-rounded"
+                                     update="msgs" />
+                </h:panelGroup>
+
+                <p:spacer width="10" />
+
+                <!-- Botão Listar -->
+                <p:button outcome="lista" value="Listar Tarefas"
+                          icon="pi pi-list"
+                          styleClass="p-button-info p-button-rounded" />
+
+                <p:spacer width="10" />
+
+                <!-- Botão Voltar ao Início -->
+                <p:button outcome="index" value="Início"
+                          icon="pi pi-home"
+                          styleClass="p-button-secondary p-button-rounded" />
+            </div>
+
+        </p:panel>
+    </h:form>
+
+</h:body>
+</html>

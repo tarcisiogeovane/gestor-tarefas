@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+<h:head>
+    <title>Cadastro de Tarefa</title>
+</h:head>
+<h:body>
+
+    <h1>Cadastrar Nova Tarefa</h1>
+
+    <h:form>
+
+        <h:outputLabel value="Título:" for="titulo" />
+        <h:inputText id="titulo" value="#{tarefaBean.tarefa.titulo}" /><br/><br/>
+
+        <h:outputLabel value="Descrição:" for="descricao" />
+        <h:inputTextarea id="descricao" value="#{tarefaBean.tarefa.descricao}" rows="4" cols="40" /><br/><br/>
+
+        <h:outputLabel value="Responsável:" for="responsavel" />
+        <h:inputText id="responsavel" value="#{tarefaBean.tarefa.responsavel}" /><br/><br/>
+
+        <h:outputLabel value="Prioridade:" for="prioridade" />
+        <h:selectOneMenu id="prioridade" value="#{tarefaBean.tarefa.prioridade}">
+            <f:selectItem itemLabel="Selecione" itemValue="" />
+            <f:selectItem itemLabel="Alta" itemValue="ALTA" />
+            <f:selectItem itemLabel="Média" itemValue="MEDIA" />
+            <f:selectItem itemLabel="Baixa" itemValue="BAIXA" />
+        </h:selectOneMenu><br/><br/>
+
+        <h:outputLabel value="Prazo (yyyy-mm-dd):" for="deadline" />
+        <h:inputText id="deadline" value="#{tarefaBean.deadlineTexto}" /><br/><br/>
+
+        <h:commandButton value="Salvar Tarefa" action="#{tarefaBean.salvar}" />
+
+    </h:form>
+
+    <br/>
+    <h:messages />
+
+</h:body>
+</html>

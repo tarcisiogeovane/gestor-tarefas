@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+<h:head>
+    <title>Lista de Tarefas</title>
+</h:head>
+<h:body>
+
+    <h1>Lista de Tarefas</h1>
+
+    <h:form>
+        <h:dataTable value="#{tarefaBean.tarefas}" var="tarefa" border="1">
+
+            <h:column>
+                <f:facet name="header">Título</f:facet>
+                #{tarefa.titulo}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Responsável</f:facet>
+                #{tarefa.responsavel}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Prioridade</f:facet>
+                #{tarefa.prioridade}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Prazo</f:facet>
+                #{tarefa.deadline}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Status</f:facet>
+                <h:outputText value="#{tarefa.concluida ? 'Concluída' : 'Em andamento'}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Ações</f:facet>
+                <h:commandLink value="Concluir" action="#{tarefaBean.concluir(tarefa)}" rendered="#{!tarefa.concluida}" />
+                |
+                <h:commandLink value="Excluir" action="#{tarefaBean.excluir(tarefa)}" />
+            </h:column>
+
+        </h:dataTable>
+    </h:form>
+
+    <br/>
+    <h:link outcome="index.xhtml" value="Voltar ao início" />
+
+</h:body>
+</html>

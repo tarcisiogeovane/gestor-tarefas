@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Lista de Tarefas</title>
+</h:head>
+
+<h:body style="padding: 40px; background-color: #f9f9f9; font-family: Arial, sans-serif;">
+
+    <h:form id="form">
+
+        <h1 style="text-align: center;">Lista de Tarefas</h1>
+
+        <p:messages id="msgs"
+                    autoUpdate="true"
+                    closable="true" />
+        <h3>Filtros de Busca</h3>
+
+        <p:panelGrid columns="4" style="margin-bottom: 20px;" columnClasses="label,value,label,value">
+
+            <h:outputLabel for="titulo" value="Título/Descrição:" />
+            <p:inputText id="titulo" value="#{tarefaBean.tituloOuDescricaoFiltro}" />
+
+            <h:outputLabel for="responsavel" value="Responsável:" />
+            <p:inputText id="responsavel" value="#{tarefaBean.responsavelFiltro}" />
+
+            <h:outputLabel for="prioridade" value="Prioridade:" />
+            <p:selectOneMenu id="prioridade" value="#{tarefaBean.prioridadeFiltro}">
+                <f:selectItem itemLabel="-- Todos --" itemValue="#{null}" />
+                <f:selectItem itemLabel="Alta" itemValue="#{true}" />
+                <f:selectItem itemLabel="Normal" itemValue="#{false}" />
+            </p:selectOneMenu>
+
+            <h:outputLabel for="situacao" value="Situação:" />
+            <p:selectOneMenu id="situacao" value="#{tarefaBean.situacaoFiltro}">
+                <f:selectItem itemLabel="-- Todas --" itemValue="#{null}" />
+                <f:selectItem itemLabel="Concluída" itemValue="#{true}" />
+                <f:selectItem itemLabel="Em andamento" itemValue="#{false}" />
+            </p:selectOneMenu>
+
+        </p:panelGrid>
+
+        <p:dataTable id="tabelaTarefas"
+                     value="#{tarefaBean.tarefas}"
+                     var="tarefa"
+                     style="width: 100%;"
+                     emptyMessage="Nenhuma tarefa encontrada"
+                     paginator="true" rows="10">
+
+            <p:column headerText="Título">
+                #{tarefa.titulo}
+            </p:column>
+
+            <p:column headerText="Responsável">
+                #{tarefa.responsavel}
+            </p:column>
+
+            <p:column headerText="Prioridade">
+                #{tarefa.prioridade}
+            </p:column>
+
+            <p:column headerText="Prazo">
+                <h:outputText value="#{tarefa.deadline}"
+                              converter="localDateConverter"/>
+            </p:column>
+
+            <p:column headerText="Status">
+                <h:outputText value="#{tarefa.concluida ? 'Concluída' : 'Em andamento'}" />
+            </p:column>
+
+            <p:column headerText="Ações">
+                <p:commandButton value="Concluir"
+                                 icon="pi pi-check"
+                                 action="#{tarefaBean.concluir(tarefa)}"
+                                 rendered="#{!tarefa.concluida}"
+                                 update="form:msgs form:tabelaTarefas"
+                                 styleClass="p-button-success p-button-sm" />
+                <p:spacer width="5"/>
+
+                <p:commandButton value="Editar"
+                                 icon="pi pi-pencil"
+                                 action="#{tarefaBean.prepararEdicao(tarefa)}"
+                                 update="form:msgs form:tabelaTarefas"
+                                 styleClass="p-button-warning p-button-sm" />
+                <p:spacer width="5"/>
+
+                <p:commandButton value="Excluir"
+                                 icon="pi pi-trash"
+                                 action="#{tarefaBean.excluir(tarefa)}"
+                                 update="form:msgs form:tabelaTarefas"
+                                 styleClass="p-button-danger p-button-sm"
+                                 onclick="return confirm('Tem certeza que deseja excluir esta tarefa?');" />
+            </p:column>
+        </p:dataTable>
+
+        <br/>
+
+        <div style="text-align: center;">
+            <p:commandButton value="Buscar"
+                             action="#{tarefaBean.buscar}"
+                             icon="pi pi-search"
+                             styleClass="p-button-info p-button-rounded"
+                             update="form:msgs form:tabelaTarefas"/>
+
+            <p:spacer width="10"/>
+
+            <p:button value="Cadastrar Nova Tarefa"
+                      outcome="cadastro"
+                      icon="pi pi-plus"
+                      styleClass="p-button-success p-button-rounded"/>
+
+            <p:spacer width="10"/>
+
+            <p:button value="Início"
+                      outcome="index"
+                      icon="pi pi-home"
+                      styleClass="p-button-secondary p-button-rounded"/>
+        </div>
+
+    </h:form>
+</h:body>
+</html>
