@@ -1,6 +1,8 @@
 # Gestor de Tarefas
 
-Sistema web para cadastro, listagem e gerenciamento de tarefas desenvolvido em Java usando Jakarta EE (JSF, CDI, JPA), PrimeFaces e Hibernate. O projeto é empacotado como arquivo WAR e pode ser implantado em servidores de aplicação como WildFly (que eu utilizei) ou Payara.
+Sistema web criado como proposta para a seleção de Estágio Desenvolvedor Java para a ESIG.
+
+Utilizado para cadastro, listagem e gerenciamento de tarefas desenvolvido em Java usando Jakarta EE (JSF, CDI, JPA), PrimeFaces e Hibernate. O projeto é empacotado como arquivo WAR e pode ser implantado em servidores de aplicação como WildFly (que eu utilizei) ou Payara.
 
 ---
 
